@@ -69,13 +69,8 @@ let blogCon = document.querySelector('.blog-con')
 let ids = []
 
 const printTodo = async () => {
-    // onSnapshot(collection(db, "blogs"), (data) => {
-    const q = query(collection(db, "blogs"), orderBy("timestamp", "desc"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        if(data.docs.length < 1){
-            loader.style.display = "none";
-        }
-        querySnapshot.forEach(async blog => {
+    onSnapshot(collection(db, "blogs"), (data) => {
+        data.docChanges().forEach(async blog => {
             ids.push(blog.doc.id)
             let userID = blog.doc.data().userID;
 
