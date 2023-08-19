@@ -451,7 +451,7 @@ try {
     }
     else{
         if(location.pathname !== "/index.html" && location.pathname !== "/register.html"){
-            window.location = "index.html"
+            // window.location = "index.html"
         }
     }
 });
