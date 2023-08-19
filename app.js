@@ -112,7 +112,7 @@ const printTodo = async () => {
                     <div id="blog-content">${blog.doc.data().content}</div>
 
                     <div>
-                        <button class="blog-but" id="blog-delete" onclick="deleteBlog('${blog.doc.id}')">Delete</button>
+                        <button class="blog-but" id="blog-delete" onclick="deleteBlog('${blog.doc.id}', this.parentNode.parentNode)">Delete</button>
                         <button class="blog-but" id="blog-edit" onclick="editBlog('${blog.doc.id}')">Edit</button>
                     </div>
                 </div>`;
@@ -151,8 +151,18 @@ const addBlog = async () => {
 
 window.addBlog = addBlog
     
-const deleteBlog = async (id) => {
-    await deleteDoc(doc(db, "blogs", id));
+const deleteBlog = async (id, element) => {
+    // await deleteDoc(doc(db, "blogs", id));
+    // blogCon.innerHTML = ""
+    // console.log(ele)
+    try {
+        await deleteDoc(doc(db, "blogs", id));
+        // Remove the element from the DOM
+        console.log(element)
+        element.remove();
+    } catch (error) {
+        console.error("Error deleting document:", error);
+    }
 }
 
 window.deleteBlog = deleteBlog
