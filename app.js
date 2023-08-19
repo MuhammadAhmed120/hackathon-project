@@ -385,9 +385,6 @@ try {
         let checkUID = localStorage.getItem('UID')
         if (user && checkUID) {
             const uid = user.uid;
-            if(location.pathname !== "/profile.html" && location.pathname !== "/dashboard.html"){
-                window.location = "profile.html"
-            }
             const docRef = doc(db, "users",  uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
@@ -450,9 +447,6 @@ try {
         }
     }
     else{
-        if(location.pathname !== "/index.html" && location.pathname !== "/register.html"){
-            // window.location = "index.html"
-        }
     }
 });
 } catch (error) {
