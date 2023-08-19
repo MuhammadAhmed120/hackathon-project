@@ -70,7 +70,15 @@ let ids = []
 
 const printTodo = async () => {
     onSnapshot(collection(db, "blogs"), (data) => {
+        console.log("RE-RENDERED")
         data.docChanges().forEach(async blog => {
+            if (blog.type === "removed") {
+                const blogElement = document.getElementById(blog.doc.id);
+                if (blogElement) {
+                    blogElement.remove();
+                }
+                return;
+            }
             ids.push(blog.doc.id)
             let userID = blog.doc.data().userID;
 
@@ -143,7 +151,6 @@ const addBlog = async () => {
 
 window.addBlog = addBlog
     
-
 const deleteBlog = async (id) => {
     await deleteDoc(doc(db, "blogs", id));
 }
@@ -152,45 +159,38 @@ window.deleteBlog = deleteBlog
 
 
 let edit = false;
+let editingBlogId = null;
+
 const editBlog = async (v, id) => {
-    let editValue = v.parentNode.parentNode.parentNode.childNodes[1]
-    if(edit){
-        await updateDoc(doc(db, "blogs", id), {
-            value : editValue.value 
+    const blogElement = v.parentNode.parentNode.parentNode;
+    const editValueTitle = blogElement.querySelector(".blog-title h2");
+    const editValueContent = blogElement.querySelector("#blog-content");
+
+    if (edit) {
+        await updateDoc(doc(db, "blogs", editingBlogId), {
+            title: editValueTitle.innerText,
+            content: editValueContent.innerText
         });
-        editValue.disabled = false;
-        editValue.className = "dis";
-        editValue.blur()
-        v.innerHTML = "EDIT"
-        edit = false;   
-    }
-    else{
-        editValue.disabled = false;
-        editValue.className = "ena";
-        editValue.focus()
-        v.innerHTML = "UPDATE"
+        editValueTitle.contentEditable = false;
+        editValueTitle.classList.remove("ena");
+        editValueContent.contentEditable = false;
+        editValueContent.classList.remove("ena");
+        v.innerHTML = "EDIT";
+        edit = false;
+        editingBlogId = null;
+    } else {
+        editValueTitle.contentEditable = true;
+        editValueTitle.classList.add("ena");
+        editValueContent.contentEditable = true;
+        editValueContent.classList.add("ena");
+        editValueTitle.focus();
+        v.innerHTML = "UPDATE";
         edit = true;
+        editingBlogId = id;
     }
-}
+};
 
-
-// let pro = document.querySelector('.progress');
-
-// let resetTodo = async () => {
-//     pro.style.display = "flex";
-//     blogCon.innerHTML = "";
-
-//     let arr = []
-//     for(var i = 0; i < ids.length; i++){
-//         arr.push(await deleteDoc(doc(db, "blogs", ids[i])))
-//     }
-//     Promise.all(arr)
-//     .then((res) => {
-//         setTimeout(function(){
-//             pro.style.display = "none";
-//         }, 1000);
-//     })
-// }
+window.editBlog = editBlog
 
 
 bannerPic && bannerPic.addEventListener("mouseenter", () => {
