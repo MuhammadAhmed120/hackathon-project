@@ -956,6 +956,10 @@ body{
         top: 30%;
         left: 29%;
     }
+
+    .con-blog{
+        width: 600px;
+    }
 }
 
 
@@ -1149,6 +1153,10 @@ body{
         width: 50px;
         height: 50px;
     }
+
+    .con-blog{
+        width: 450px;
+    }
 }
 
 
@@ -1279,9 +1287,24 @@ body{
         font-size: 12px;
         gap: 0.3rem;
     }
+
+    .con-blog{
+        width: 400px;
+    }
 }
 
 @media screen and (max-width: 465px) {
+    .con-blog{
+        width: 95%;
+    }
+
+    .blog-info p {
+        color: #474c52;
+        font-weight: 600;
+        margin-top: 10px;
+        font-size: 10px;
+    }    
+
     .nav{
         height: 60px;
     }
