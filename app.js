@@ -65,7 +65,8 @@ let cancelBut = document.querySelector('#cancelBut')
 let titleInp = document.querySelector('#title-inp')
 let contentInp = document.querySelector('#content-inp')
 
-let blogCon = document.querySelector('.blog-con')
+let blogCon = document.querySelector('#blog-con')
+let myBlogCon = document.querySelector('#blog-con')
 let ids = []
 
 const printTodo = async () => {
@@ -116,7 +117,6 @@ const printTodo = async () => {
                         <button class="blog-but" id="blog-edit" onclick="editBlog('${blog.doc.id}')">Edit</button>
                     </div>
                 </div>`;
-
                 loader.style.display = "none";
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -126,6 +126,66 @@ const printTodo = async () => {
 };
 
 printTodo();
+
+
+
+const printMyBlogs = async (userUID) => {
+    const blogsRef = collection(db, "blogs");
+
+    try {
+        const blogsSnapshot = await getDocs(blogsRef);
+        myBlogCon.innerHTML = ""; // Clear the container before printing
+
+        blogsSnapshot.forEach(blogDoc => {
+            const blogData = blogDoc.data();
+            
+            if (blogData.userID === userUID) {
+                // This blog belongs to the current user, so print it
+                const userDoc = await getDoc(doc(db, "users", userUID));
+                const userData = userDoc.data();
+
+                const userProf = userData.profileImg;
+                const nameUser = `${userData.firstName} ${userData.lastName}`;
+                
+                myBlogCon.innerHTML += `
+                    <div class="blog">
+                        <div class="blog-title">
+                            <div>
+                                <img src="${userProf}" alt="" id="blog-img">
+                            </div>
+                            <div>
+                                <div>
+                                    <h2 id="blog-title">${blogData.title}</h2>
+                                </div>
+                                <div class="blog-info">
+                                    <p>${nameUser}</p>
+                                    <p>-</p>
+                                    <p>${blogData.time}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="blog-content">${blogData.content}</div>
+                        <div>
+                            <button class="blog-but" id="blog-delete" onclick="deleteBlog('${blogDoc.id}', this.parentNode.parentNode)">Delete</button>
+                            <button class="blog-but" id="blog-edit" onclick="editBlog('${blogDoc.id}')">Edit</button>
+                        </div>
+                    </div>`;
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching and printing blogs:", error);
+    }
+};
+
+// Get the userUID from the query parameter
+const urlSearchParams = new URLSearchParams(window.location.search);
+const queryParams = Object.fromEntries(urlSearchParams.entries());
+const userUID = queryParams.uid;
+
+// Call the function to print the user's blogs
+printMyBlogs(userUID);
+
+
 
 
 const addBlog = async () => {
@@ -152,9 +212,6 @@ const addBlog = async () => {
 window.addBlog = addBlog
     
 const deleteBlog = async (id, element) => {
-    // await deleteDoc(doc(db, "blogs", id));
-    // blogCon.innerHTML = ""
-    // console.log(ele)
     try {
         await deleteDoc(doc(db, "blogs", id));
         // Remove the element from the DOM
