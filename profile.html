@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="form.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+
+<div class="nav">
+    <input type="checkbox" id="nav-check">
+    <div class="nav-header">
+        <div class="nav-title">
+            Personal Blogging App
+        </div>
+    </div>
+    <div class="nav-btn">
+        <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
+    
+    <div class="nav-links">
+        <!-- <a href="#">Home</a> -->
+        <a href="profile.html">Profile</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="https://github.com/MuhammadAhmed120" target="_blank">Github</a>
+        <!-- <a href="" target="_blank">JsFiddle</a> -->
+    </div>
+
+    <div class="search-bar">
+        <a href="profile.html" id="top-name"></a>
+    </div>
+</div> 
+
+<div class="search-results"></div>
+
+
+<div class="con">
+    <div class="pic-con">
+        <div class="banner-top">
+            <div class="banner-img">
+                <label for="banner-input">
+                    <img src="Images/default-banner.jpg" alt="user banner" class="banner">
+                    <p id="changeBan" class="change textB">Change Picture</p>
+                </label>
+            <input type="file" name="" id="banner-input" class="dis">
+        </div>
+
+        <div class="updating-con">
+            <p id="updatingBan">Updating Banner<span class="loading"></span></p>
+        </div>
+            
+        <div class="profile-img">
+            <label for="profile-input">
+                <img src="Images/user-icon.png" alt="user icon" class="profile">
+                <p id="changePic" class="change textP">Change Picture</p>
+                <div class="pic-loader dis">
+                    <div class="loader"></div>
+                </div>
+            </label>
+            <input type="file" id="profile-input" class="dis">
+        </div>
+
+        </div>
+    </div>
+
+    <div class="prof-wrap">
+        <div class="prof-con">
+            <div id="buttons">
+                <button class="buts" id="edit-but"><i class="fa-solid fa-user-pen"></i> <span>Edit Profile</span></button>
+                <button class="buts" id="logout-but"><abbr title="Logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></abbr></button>
+            </div>
+        
+            <div class="loader1">
+                <div class="loader"></div>
+            </div>
+            
+            <div class="profile-name">
+                <div class="aa">
+                    <h1 id="profile-name"></h1>
+                    <p id="bio">Bio:</p>
+                    <p id="profile-bio"></p>
+                </div>
+
+                <div class="albums-con">
+                    <h1>Albums:</h1>
+                    <div class="albums">
+                        <div class="album1">
+                            <div class="album-loading" id="albumLoader1">
+                                <div class="album-loader"></div>
+                            </div>
+                            <label for="album01">
+                                <img src="Images/user-icon.png" alt="" class="album-pic" id="album1-pic">
+                            </label>
+                            <input type="file" name="" id="album01" class="dis" onchange="changeAlbum(1)">
+                        </div>
+
+                        <div class="album1">
+                            <div class="album-loading" id="albumLoader2">
+                                <div class="album-loader"></div>
+                            </div>
+                            <label for="album02">
+                                <img src="Images/user-icon.png" alt="" class="album-pic" id="album2-pic">
+                            </label>
+                            <input type="file" name="" id="album02" class="dis" onchange="changeAlbum(2)">
+                        </div>
+
+                        <div class="album1">
+                            <div class="album-loading" id="albumLoader3">
+                                <div class="album-loader"></div>
+                            </div>
+                            <label for="album03">
+                                <img src="Images/user-icon.png" alt="" class="album-pic" id="album3-pic">
+                            </label>
+                            <input type="file" name="" id="album03" class="dis" onchange="changeAlbum(3)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <div class="settings-container" id="editSetting">
+        <h1 class="settings-title">Profile Settings</h1>
+        <div class="settings-form">
+        <fieldset class="setting-fieldset">
+            <legend class="fieldset-legend">User Details:</legend>
+            <div class="setting-item">
+            <label for="nameInp" class="setting-label">Name:</label>
+            <input type="text" name="" class="setting-input" id="nameInp" value="">
+            </div>
+    
+            <div class="setting-item">
+            <label for="bioInp" class="setting-label">Bio:</label>
+            <textarea name="" class="setting-input" id="bioInp" maxlength="120">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro doloremque, nesciunt consequatur dolorem deleniti quisqua</textarea>
+            </div>
+        </fieldset>
+    
+        <fieldset class="setting-fieldset">
+            <legend class="fieldset-legend">Account Settings:</legend>
+            <div class="setting-item">
+            <label for="emailInp" class="setting-label">Email:</label>
+            <input type="email" name="" class="setting-input" id="emailInp" value="">
+            </div>
+    
+            <div class="setting-item">
+            <label for="passwordInp" class="setting-label">Password:</label>
+            <input type="password" name="" class="setting-input" id="passwordInp" value="">
+            </div>
+        </fieldset>
+        </div>
+    
+        <div class="button-container">
+            <button id="cancelBut" class="settings-button cancel-button">CANCEL</button>
+            <button id="updateBut" class="settings-button update-button">UPDATE</button>
+        </div>
+    </div>
+      
+    <div class="talk-but">
+        <button id="talkBut"><i class="fa-brands fa-rocketchat"></i></button>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
