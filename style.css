@@ -753,7 +753,7 @@ body{
 }
                                     
 .con-blog{
-    width: 40%;
+    width: 800px;
     /* background-color: pink; */
     margin: 0 auto;
     display: flex;
@@ -761,6 +761,7 @@ body{
     justify-content: center;
     align-items: flex-start;
     gap: 3rem;
+    margin-bottom: 50px;
 }
 
 
