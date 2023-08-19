@@ -127,7 +127,6 @@ const printTodo = async () => {
 
 printTodo();
 
-
 const addBlog = async () => {
     let title = titleInp.value;
     let content = contentInp.value;
