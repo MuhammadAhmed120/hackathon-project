@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+    <nav class="dash-nav">
+        <div class="header">
+            <div class="header-con">
+                <span>
+                    <h2 id="logo">Personal Blogging App</h2>
+                </span>
+                <span id="nav-con">
+                    <a href="profile.html" style="text-decoration: none;"><p id="top-name"></p></a>
+                    <button class="buts" id="logout-but" style="background-color: #7394ff; border: none;"><abbr title="Logout" ><i class="fa-solid fa-arrow-right-from-bracket"></i></abbr></button>
+                </span>
+            </div>
+        </div>
+        <div class="nav-con">
+            <h1 style="font-size: 32px;">Dashboard</h1>
+        </div>
+    </nav>
+
+    <div class="loader1 dis">
+        <div class="loader"></div>
+    </div>
+
+<div class="con-blog">
+    <div class="blog-post">
+        <input type="text" name="" id="title-inp" placeholder="Enter Title">
+        <textarea style="resize: none;" name="" id="content-inp" placeholder="What is in your mind" cols="30" rows="6"></textarea>
+        <button id="post-but" onclick="addBlog()">Publish Blog</button>
+    </div>
+
+
+    <div class="blogs-con">
+        <h1 id="blog-head">My Blogs</h1>
+
+        <div class="blog-con">
+
+            <!-- <div class="blog">
+                <div class="blog-title">
+                    <div>
+                        <img src="Images/user-icon.png" alt="" id="blog-img">
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <h2 id="blog-title">An Action Button Could Be Coming to the iPhone 15</h2>
+                        </div>
+
+                        <div class="blog-info">
+                            <p>Muhammad Ahmed</p>
+                            <p>-</p>
+                            <p>August 16th 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="blog-content">
+                    Apple could be putting an Action button on your next iPhone. According to a July report from MacRumors, code in the fourth iOS 17 developer beta hints at functionality for an Action button on the next-gen iPhone 15 Pro and Pro Max models.
+                    Apple introduced the Action button on the Apple Watch Ultra. It's a physical button on the side of the Apple Watch Ultra that allows you to run a preselected function or program when you press it without unlocking your device or navigating to an app. Some of the preselected functions include starting a stopwatch, beginning a workout and turning on your flashlight.
+                </div>
+                <div>
+                    <button class="blog-but" id="blog-delete">Delete</button>
+                    <button class="blog-but" id="blog-edit">Edit</button>
+                </div>
+            </div> -->
+            
+        </div>
+
+    </div>
+
+    
+</div>
+
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
