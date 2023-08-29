@@ -1,15 +1,15 @@
-*{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
 }
 
-body{
+body {
     background-color: #f3f2f0;
     padding: 0;
     margin: 0;
 }
 
-nav{
+nav {
     width: 100%;
     height: 130px;
     background-color: white;
@@ -19,7 +19,7 @@ nav{
     align-items: center;
 }
 
-.header{
+.header {
     background: #7749F8;
     width: 100%;
     color: white;
@@ -29,35 +29,35 @@ nav{
     height: 45px;
 }
 
-.header-con{
+.header-con {
     width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header-con>h2{
+.header-con>h2 {
     font-size: 20px;
 }
 
-.header-con>p>a{
+.header-con>p>a {
     text-decoration: none;
     color: white;
     font-weight: 500;
 }
 
-.nav-con{
+.nav-con {
     width: 80%;
     position: relative;
 }
 
-.nav-con>h1{
+.nav-con>h1 {
     font-size: 40px;
     color: #343A40;
     margin-top: 20px;
 }
 
-.login{
+.login {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -70,22 +70,23 @@ nav{
     align-items: center;
 }
 
-.sign-up{
+.sign-up {
     height: 510px;
 }
 
-.sign{
+.sign {
     margin-bottom: 0;
 }
 
-.credentials{
+.credentials {
     display: flex;
     flex-direction: column;
-    gap: 1rem;  
+    gap: 1rem;
     width: 90%;
 }
 
-.email-inp, .pass-inp{
+.email-inp,
+.pass-inp {
     font-size: 20px;
     padding: 2% 3% 2% 3%;
     background-color: #f3f3f3;
@@ -93,11 +94,12 @@ nav{
     border-radius: 8px;
 }
 
-.email-inp:hover, .pass-inp:hover{
+.email-inp:hover,
+.pass-inp:hover {
     background-color: #e2e2e2;
 }
 
-.but{
+.but {
     font-size: 18px;
     padding: 10px 20px;
     background-color: #0a66c2;
@@ -108,15 +110,15 @@ nav{
     margin-bottom: 0;
 }
 
-.but:hover{
+.but:hover {
     background-color: #1183f6;
 }
 
-.but:active{
+.but:active {
     opacity: 0.8;
 }
 
-.or{
+.or {
     margin-top: 0;
     position: relative;
     display: flex;
@@ -126,13 +128,13 @@ nav{
     height: 40px;
 }
 
-.or>p{
+.or>p {
     font-size: 1.6em;
     font-weight: lighter;
     color: #464646
 }
 
-.or::before{
+.or::before {
     content: '';
     position: absolute;
     height: 2px;
@@ -142,7 +144,7 @@ nav{
     top: 20px;
 }
 
-.or::after{
+.or::after {
     content: '';
     position: absolute;
     height: 2px;
@@ -152,34 +154,34 @@ nav{
     top: 20px;
 }
 
-.already>a{
+.already>a {
     color: #0f76dd;
 }
 
-.already>a:hover{
+.already>a:hover {
     color: #50a6fd;
 }
 
 
 @media screen and (max-width: 465px) {
-    nav{
+    nav {
         height: 105px;
     }
 
-    .header-con>h2{
+    .header-con>h2 {
         font-size: 15px;
     }
-    
-    .header-con>p{
+
+    .header-con>p {
         font-size: 12px;
     }
-    
-    .nav-con>h1{
+
+    .nav-con>h1 {
         margin-top: 10px;
         font-size: 30px;
     }
-    
-    .login{
+
+    .login {
         max-width: 320px;
         font-size: 14px;
         height: 400px;
@@ -188,11 +190,12 @@ nav{
         top: 50px;
     }
 
-    .credentials>label{
+    .credentials>label {
         font-size: 1em;
     }
 
-    .email-inp, .pass-inp{
+    .email-inp,
+    .pass-inp {
         background-color: transparent;
         border: none;
         border-bottom: 1px solid #171717;
@@ -205,21 +208,21 @@ nav{
         background: transparent;
     } */
 
-    .but{
+    .but {
         font-weight: 600;
         font-size: 15px;
     }
 
-    .reg-but{
+    .reg-but {
         margin-top: 15px;
     }
 
-    .already{
+    .already {
         font-size: 15px;
         text-align: center;
     }
 
-    .or::before{
+    .or::before {
         content: '';
         position: absolute;
         height: 2px;
@@ -229,8 +232,8 @@ nav{
         left: 10px;
         top: 20px;
     }
-    
-    .or::after{
+
+    .or::after {
         content: '';
         position: absolute;
         height: 2px;
