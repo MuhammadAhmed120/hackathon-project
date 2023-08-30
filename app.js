@@ -100,11 +100,11 @@ if (!hasParameter) {
       contentInp.focus()
     }
     else {
-      if (postingCon && postingLoader && postOpa) {
-        postingCon.style.display = "flex"
-        postingLoader.style.display = "flex"
-        postOpa.style.opacity = 0.4
-      }
+      // if (postingCon && postingLoader && postOpa) {
+      postingCon.style.display = "flex"
+      postingLoader.style.display = "flex"
+      postOpa.style.opacity = 0.4
+      // }
       let userID = localStorage.getItem("UID");
       const userDoc = await getDoc(doc(db, "users", userID));
       const userData = userDoc.data();
@@ -122,15 +122,28 @@ if (!hasParameter) {
 
   window.addBlog = addBlog;
 
+  let edit = false
   const printBlog = async () => {
     const q = query(collection(db, "blogs"), orderBy('timestamp', 'asc'));
+    const existingBlogIds = new Set()
+
     const unsubscribe = onSnapshot(q, (data) => {
       try {
         if (dashLoader) {
-          // dashLoader.style.display = "none";
+          dashLoader.style.display = "none";
+        }
+
+        console.log(edit)
+        if(edit){
+          edit = false
+          location.reload()
         }
 
         data.docChanges().forEach(async (blog) => {
+          const blogData = blog.doc.data();
+          const userID = blogData.user.userID;
+          const currentID = localStorage.getItem('UID');
+          let timestamp = blogData.timestamp.toDate().toLocaleString()
           if (blog.type === "removed") {
             const blogElement = document.getElementById(blog.doc.id);
             if (blogElement) {
@@ -139,12 +152,8 @@ if (!hasParameter) {
             return;
           }
 
-          const blogData = blog.doc.data();
-          const userID = blogData.user.userID;
-          const currentID = localStorage.getItem('UID');
-
           try {
-            if (userID) {
+            if (userID && timestamp) {
               let userProf = blogData.user.profileImg;
               let nameUser = `${blogData.user.firstName} ${blogData.user.lastName}`;
 
@@ -161,7 +170,7 @@ if (!hasParameter) {
 
                   <div>
                       <div>
-                          <h2 id="blog-title">${blog.doc.data().blogTitle}</h2>
+                          <h2 id="blog-title">${blogData.blogTitle}</h2>
                       </div>
 
                       <div class="blog-info">
@@ -172,11 +181,11 @@ if (!hasParameter) {
                   </div>
               </div>
 
-              <div id="blog-content">${blog.doc.data().blogCon}</div>
+              <div id="blog-content">${blogData.blogCon}</div>
 
               ${currentID === userID ? `<div>
                   <button class="blog-but" id="blog-delete" onclick="deleteBlog(this.parentNode.parentNode, '${blog.doc.id}')">Delete</button>
-                  <button class="blog-but" id="blog-edit" onclick="editBlog('${blog.doc.id}', '${blog.doc.data().blogTitle}', '${blog.doc.data().blogCon}', this.parentNode.parentNode)">Edit</button>
+                  <button class="blog-but" id="blog-edit" onclick='editBlog("${blog.doc.id}","${blogData.blogTitle}","${blogData.blogCon}")'>Edit</button>
               </div>` : ``}
             </div>`;
 
@@ -222,19 +231,20 @@ if (!hasParameter) {
   let cancelBtn = document.querySelector('#cancelBtn')
   cancelBtn && cancelBtn.addEventListener('click', () => {
     modal.style.display = ""
+    document.body.style.overflow = "";  
   })
 
   let editTitle = document.querySelector('#title-edit-inp')
   let editContent = document.querySelector('#content-edit-inp')
   let modal = document.querySelector('#modal')
-  let blogID, blogElement;
+  let blogID;
 
-  const editBlog = async (id, title, content, element) => {
+  const editBlog = async (id, title, content) => {
     blogID = id
-    blogElement = element
     editTitle.value = title
     editContent.value = content
     modal.style.display = "flex"
+    document.body.style.overflow = "hidden";
   };
 
   let updateBlog = async () => {
@@ -242,18 +252,23 @@ if (!hasParameter) {
     updatingLoader.style.display = "flex"
     let newTitle = editTitle.value
     let newContent = editContent.value
-    console.log("newTitle =>", newTitle, "newContent =>", newContent)
+    // console.log("newTitle =>", newTitle, "newContent =>", newContent)
     const blogEditRef = doc(db, "blogs", blogID);
-    await updateDoc(blogEditRef, {
-      blogTitle: newTitle,
-      blogCon: newContent,
-    });
-    deleteBlog(blogElement)
-    blogID = ""
-    blogElement = ""
-    updatingCon.style.display = ""
-    updatingLoader.style.display = ""
-    modal.style.display = "none"
+    try {
+      await updateDoc(blogEditRef, {
+        blogTitle: newTitle,
+        blogCon: newContent,
+      });
+
+      blogID = ""
+      updatingCon.style.display = ""
+      updatingLoader.style.display = ""
+      modal.style.display = "none"
+      document.body.style.overflow = "";  
+      location.reload()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   window.editBlog = editBlog;
